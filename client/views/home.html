@@ -1,0 +1,88 @@
+<div ng-controller="homeController">
+	<div class="container-fluid">
+		<div class="row" ng-if="isLoggedin">
+			<div class="row">
+		        <div class="col-xs-12" style="margin-bottom:10px">
+		        	<div class="row">
+			      		<div class="col-xs-4 marTB25 hand" ng-class="{'activeBlck':commentsActive}" ng-click="commentsDiv()">
+			      			<p align="center">Activities</p>
+			      		</div>
+			      		<div class="col-xs-4 marTB25 hand" ng-class="{'activeBlck':notifsActive}" ng-click="notifsDiv()">
+			      			<p align="center">Notifs <span class="badge">{{count}}</span></p>
+			      		</div>
+			      		<div class="col-xs-4 marTB25 hand" ng-class="{'activeBlck':settingsActive}" ng-click="settingsDiv()">
+			      			<p align="center">Settings</p>
+			      		</div>
+			      	</div>
+          		</div>
+          	</div>
+          	<div ng-if="notifsActive" style="min-height:500px" ng-repeat="notif in notifications | orderBy: '-time'">
+				<div class="col-xs-12 hand" ng-class="{{notif.read}}?'msgUnread':'trendBlock'" ng-click="notifRead(notif)">
+		            <div class="row">
+		                <div class="col-xs-2">
+		                	<img src="{{notif.imgUrl}}" style="width:50px;margin-top:-12px;" />
+		                </div>
+		                <div class="col-xs-10">
+	                        <p class="notifTxt">{{notif.msg}}</p>
+	                    </div>
+		            </div>
+		        </div>
+		    </div>
+	        <div ng-if="commentsActive" class="col-xs-12 trendBlock hand"  ng-repeat="comment in activity | orderBy: '-createdOn'">
+	            <div class="row">
+	                <div class="col-xs-12 qFont" style="padding-bottom:0px;margin-top:-25px" ng-click="goToQ(comment)">
+                        <p>{{comment.question}}</p>
+                        <p ng-click="goToCom(comment)">{{comment.parentCom}}</p>
+                    </div>
+                    <div class="col-xs-12" style="margin-top:10px" ng-click="goToCom(comment)">
+                    	<p>{{comment.comment}}</p>
+                    </div>
+	            </div>
+	        </div>
+	        <div ng-if="settingsActive" class="col-xs-12" style="min-height:500px">
+	        	<div class="row">
+	        		<div class="col-xs-4">
+	        			<img src="{{imgUserBig}}" />
+	        		</div>
+	        		<div class="col-xs-8">
+	        			<p>{{userName}}</p>
+	        			<p>{{email}}</p>
+	        		</div>
+	        	</div>
+	        	<div class="col-xs-12" ng-if="maiBaap">
+	        		<div class="col-xs-12">
+	        			{{allMemDataLength}}
+	        		</div>
+	        		<div class="col-xs-12" style="margin-bottom:5px" ng-repeat="data in allMemData">
+		        		<div class="col-xs-2">
+		        			<img src="{{data.imgUrlXs}}" />
+		        		</div>
+		        		<div class="col-xs-10">
+		        			<p>{{data.name}}-{{data.email}}</p>
+		        		</div>
+		        	</div>
+	        	</div>
+	        </div>
+		</div>
+		<div class="row" ng-if="!isLoggedin">
+			<div class="row" style="background-color:#fff;min-height:300px;">
+		                <div class="col-xs-12" style="margin-top:45px">
+		                    <div class="col-xs-12" style="margin-bottom:10px">
+			                    <p class="mBottom20" align="center"><b>Login using</b></p>
+			                </div>
+			                <div class="col-xs-6 hand" style="display:table-cell;vertical-align:middle;text-align:center;border-right:1px solid;margin-top:15px" ng-click="GoToGoogleLogin()">
+			                    <img src="/images/googleplusLg.png"/>
+			                    <p>Google</p>
+			                </div>
+			                <div class="col-xs-6 hand" style="display:table-cell;vertical-align:middle;text-align:center;margin-top:15px" ng-click="GoToFacebookLogin()">
+			                    <img src="/images/facebookLg.png" />
+			                    <p>Facebook</p>
+			                </div>
+		               	</div>
+
+			      		<form name="googleLogin" action="/auth/google" method="get"></form>
+			      		<form name="facebookLogin" action="/auth/facebook" method="get"></form>
+			</div>
+		</div>
+	</div>
+</div>

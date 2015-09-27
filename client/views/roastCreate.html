@@ -1,0 +1,131 @@
+<div ng-controller="roastCreateController">
+    <div class="container-fluid">
+        <div class="row" style="height:450px">
+            <div class="row" style="background-color:#fff">
+                <div class="col-xs-12" style="min-height:556px">
+                    <!-- <div class="row">
+                        <div class="col-xs-12 trendingTitle">
+                            Create Roast
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <p><b>Name of the Roastee</b></p>
+                        <input type="text" my-maxlength="50" class="form-control" ng-trim="false" ng-model="roast.name" placeholder="Name of the person/thing you want to Roast" />
+                        <p class="pull-right mTop0" style="color:grey">{{nameChar}} words left</p>
+                    </div>
+                    <div ng-if="waiting">
+                        <img src="../images/loader.gif" class="loader" />
+                    </div>
+                    <div class="col-xs-12">
+                        <p style="margin-top:10px;"><b>Describe it</b></p>
+                        <textarea type="text" style="width:100%;height:80px;" ng-trim="false" my-maxlength="150" ng-model="roast.quote" class="form-control" placeholder="Describe the person/thing you want to Roast in the most Sarcastic way"></textarea>
+                        <p class="pull-right mTop0" style="color:grey">{{descChar}} words left</p>
+                    </div>
+                    <div class="col-xs-12">
+                        <h2>Single image with resizing</h2>
+                        <div>
+                            <label for="inputImage2">Image 2</label>
+                            
+                            <input id="inputImage2" 
+                                type="file" 
+                                accept="image/*" 
+                                image="image2" 
+                                resize-max-height="300"
+                                resize-max-width="250"
+                                resize-quality="0.7" />
+                            
+                            <p>Original</p>
+                            <img ng-show="image2" ng-src="{{image2.url}}" type="{{image2.file.type}}"/>
+                            <p>Resized</p>
+                            <img ng-show="image2" ng-src="{{image2.resized.dataURL}}"/>
+                            <button type="submit" ng-click="single(image2.resized)">Add</button>
+                        </div>
+                        <div class="addImage">Add Image</div>
+                    </div>
+                    <div class="col-xs-12">
+                        <button type="button" ng-click="postRoast()" class="btn btn-place-primary" ng-disabled="btnDisable">Create Roast</button>
+                    </div> -->
+                    <div class="row">
+                        <div class="col-xs-12 trendingTitle" style="margin-top:4px;background-color:#2ECBDE;">
+                            Ask a Question
+                        </div>
+                    </div>
+                    <div class="row" ng-if="!isLoggedin">
+                        <div class="col-xs-12" style="font-size:22px;background-color:#FF4545;margin-bottom:20px;margin-top:-15px;text-align:center;">
+                            Login before asking Question
+                        </div>
+                    </div>
+                    <div class="col-xs-12" style="margin-bottom:30px;">
+                        <p><b>Write Your Question</b></p>
+                        <input type="text" class="form-control" ng-focus="removeErr()" my-maxlength="150" ng-trim="false" ng-model="debate.question1" placeholder="Write your question" />
+                        <p ng-if="showError1" class="blankErr">Kuch type kar le pahle</p>
+                        <p class="pull-right mTop0" style="color:grey;margin-bottom:10px;">{{qChar1}} words left</p>
+
+                        <p ng-if="showDesc"><b>Describe your Question (optional)</b></p>
+                        <textarea ng-if="showDesc" type="text" my-maxlength="300" ng-trim="false" ng-model="debate.description"
+                        class="form-control" style="width:100%;height:100px;" placeholder="Write Description for your Question (optional)"></textarea>
+                        <p class="pull-right mTop0" ng-if="showDesc" style="color:grey;margin-bottom:10px;">{{qDescChar}} words left</p>
+                        <button type="button" ng-hide="showDesc" ng-click="showDesc = true" class="btn" style="font-size: 12px;margin-top:10px;background-color:#F1F1F1;color:gray;">Add Description</button>
+                    </div>
+                    <div ng-if="waiting">
+                        <img src="../images/loader.gif" class="loader" />
+                    </div>
+                    <div class="col-xs-12" style="margin-bottom:60px;">
+                        <button type="button" ng-click="postQuestion1()" class="btn btn-place-primary" ng-disabled="btnDisable1 || !isLoggedin">Ask Question</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 trendingTitle" style="margin-top:4px;background-color:#2ECBDE;">
+                            Create a Debate
+                        </div>
+                    </div>
+                    <div class="col-xs-12" style="margin-bottom:30px;">
+                        <p><b>Write Your Debatable Question</b></p>
+                        <input type="text" class="form-control" ng-focus="removeErr()" my-maxlength="150" ng-trim="false" ng-model="debate.question2" placeholder="Write your Debatable question" />
+                        <p ng-if="showError2" class="blankErr">Kuch type kar le pahle</p>
+                        <p class="pull-right mTop0" style="color:grey;margin-bottom:10px;">{{qChar2}} words left</p>
+
+                        <p ng-if="showDesc1"><b>Describe your Question (optional)</b></p>
+                        <textarea ng-if="showDesc1" type="text" my-maxlength="300" ng-trim="false" ng-model="debate.description"
+                        class="form-control" style="width:100%;height:100px;" placeholder="Write Description for your Question (optional)"></textarea>
+                        <p class="pull-right mTop0" ng-if="showDesc1" style="color:grey;margin-bottom:10px;">{{qDescChar}} words left</p>
+
+                        <button type="button" ng-hide="showDesc1" ng-click="showDesc1 = true" class="btn" style="font-size: 12px;margin-top:10px;background-color:#F1F1F1;color:gray;">Add Description</button>
+                    </div>
+                    <div class="col-xs-12" style="margin-bottom:60px;" ng-hide="showtext">
+                        <div class="col-xs-5 voteBtn hand" ng-click="editY()">
+                            {{debate.yBtnValue}}
+                            <p align="center" class="editVoteBtn">click to Customize</p>
+                        </div>
+                        <div class="col-xs-5 col-xs-offset-2 voteBtn hand" ng-click="editY()" style="background-color:red">
+                            {{debate.nBtnValue}}
+                            <p align="center" class="editVoteBtn">Click to Customize</p>
+                        </div>
+                   </div>
+                   <div class="col-xs-12" style="margin-bottom:60px;" ng-if="showtext">
+                        <div class="col-xs-5">
+                            <div class="row">
+                                <input type="text" class="form-control" my-maxlength="10" ng-trim="false" ng-model="debate.yBtnValue" placeholder="Text for Vote Button">
+                                <p class="pull-right mTop0" style="color:grey;margin-bottom:10px;">{{yChar}} words left</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-5 col-xs-offset-2" ng-if="showtext">
+                            <div class="row">
+                                <input type="text" class="form-control" my-maxlength="10" ng-trim="false" ng-model="debate.nBtnValue" placeholder="Text for Vote Button">
+                                <p class="pull-right mTop0" style="color:grey;margin-bottom:10px;">{{nChar}} words left</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-xs-offset-3" ng-if="showtext">
+                            <p align="center" class="done hand" ng-click="doneBtn()">Done</p>
+                        </div>
+                   </div>
+                    <div ng-if="waiting">
+                        <img src="../images/loader.gif" class="loader" />
+                    </div>
+                    <div class="col-xs-12" style="margin-bottom:60px;margin-top:15px;" ng-hide="showtext">
+                        <button type="button" ng-click="postQuestion2()" class="btn btn-place-primary" ng-disabled="btnDisable2 || !isLoggedin">Create Debate</button>
+                    </div>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>

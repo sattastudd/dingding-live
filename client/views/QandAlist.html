@@ -1,0 +1,38 @@
+<div ng-controller="QandAlistController">
+	<div class="container-fluid">
+		<div class="row">
+          	<div class="col-xs-12" style="margin-bottom:10px;margin-top:10px;">
+		       	<div class="row">
+		      		<div class="col-xs-6 marTB25 Bborder hand" style="box-shadow: 0px 1px 11px -2px gray;" ng-class="{'activeBlck':recentActv}" ng-click="recentDiv()">
+			   			<p align="center">Recent</p>
+			   		</div>
+			      	<div class="col-xs-6 marTB25 Bborder hand" style="box-shadow: 0px 1px 11px -2px gray;" ng-class="{'activeBlck':popularActv}" ng-click="popularDiv()">
+		      			<p align="center">Popular</p>
+		      		</div>
+		      	</div>
+          	</div>
+			<div class="col-xs-12 trendBlock hand" ng-if="recentActv" ng-repeat="question in questions | orderBy:'-createdOn'">
+	            <div class="row" ng-click="goToDebate(question)">
+	                <div class="col-xs-12">
+                        <p class="qFont"><b>Q.</b> {{question.question}}?</p>
+                    </div>
+                   	<div class="col-xs-12" style="color:gray">
+                       	<span>By - {{question.createdBy}}</span>
+          	         	<span class="pull-right">Views - {{question.views}}</span>
+                    </div>
+	            </div>
+	        </div>
+	        <div class="col-xs-12 trendBlock hand" ng-if="popularActv" ng-repeat="question in questions | orderBy:'-views'">
+	            <div class="row" ng-click="goToDebate(question)">
+	                <div class="col-xs-12">
+                        <p class="qFont"><b>Q.</b> {{question.question}}?</p>
+                    </div>
+                   	<div class="col-xs-12" style="color:gray">
+                       	<span>By - {{question.createdBy}}</span>
+          	         	<span class="pull-right">Views - {{question.views}}</span>
+                    </div>
+	            </div>
+	        </div>
+		</div>
+	</div>
+</div>
