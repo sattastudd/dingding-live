@@ -5,12 +5,12 @@ var Mailgun = require('mailgun-js');
 
 var sendMail = function (to, subject, content) {
     var mailGun = new Mailgun({
-        apiKey: 'Will-Be-Mailed',
+        apiKey: 'key-f64d91b00d41fbb356cbfaec03574784',
         domain: 'IndiaRoasts.com'
     });
 
     var mailObj = {
-        from : 'Roaster <Roast@indiaroasts.com>',
+        from : 'India Roasts <Roast@indiaroasts.com>',
         to : to,
         subject : subject,
         html: content
