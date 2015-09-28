@@ -69,6 +69,6 @@ app.get('/404', function(req, res){
 require( './server/routers/routes' )(app, passport, express);
 
 
-app.listen(3000, function(){
+app.listen(80, function(){
 	console.log("Ready to Roast");
 });
