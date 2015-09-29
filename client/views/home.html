@@ -16,7 +16,7 @@
 			      	</div>
           		</div>
           	</div>
-          	<div ng-if="notifsActive" style="min-height:500px" ng-repeat="notif in notifications | orderBy: '-time'">
+          	<div ng-if="notifsActive" ng-repeat="notif in notifications | orderBy: '-time'">
 				<div class="col-xs-12 hand" ng-class="{{notif.read}}?'msgUnread':'trendBlock'" ng-click="notifRead(notif)">
 		            <div class="row">
 		                <div class="col-xs-2">
