@@ -5,13 +5,15 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="row">
-                            <div class="col-xs-12 borderBtm">
+                            <div class="col-xs-12">
                                 <div class="row" ng-hide="editBoxQ">
                                     <p class="titleQ"><b>Q.</b> {{questions.question}}?</p>
                                 </div>
                                 <div class="row" ng-if="editBoxQ" style="margin-top:15px">
                                     <p><b>Edit your question</b></p>
-                                    <input type="text" ng-model="questions.question" class="form-control" my-maxlength="150" ng-trim="false">
+                                    <input type="text" ng-model="questions.question" class="form-control" my-maxlength="150" ng-trim="true">
+                                    <p style="margin-top:10px"><b>Edit background image Url</b></p>
+                                    <input type="text" ng-model="questions.qImgUrl" class="form-control" my-maxlength="400" ng-trim="true">
                                     <p class="pull-right mTop0" ng-if="editBoxQ" style="color:grey">{{qEditchar}} words left</p>
                                 </div>
                                 <div ng-hide="editBoxQ">
@@ -27,6 +29,9 @@
                                         <img class="hand" social-gplus src="../images/googleplus.png"/>
                                     </span>
                                 </div>
+                            </div>
+                            <div class="row" ng-hide="editBoxQ">
+                                <img src="{{questions.qImgUrl}}" class="qBackImgUrl">
                             </div>
                             <div class="col-xs-12" ng-hide="showVoteBlock || editBoxQ">
                                 <div class="row">     

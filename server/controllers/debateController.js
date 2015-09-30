@@ -39,7 +39,8 @@ module.exports.createDebate = function(req, res){
 					no			: req.body.no,
 					yBtnValue	: req.body.yBtnValue,
 					nBtnValue	: req.body.nBtnValue,
-					debate 		: req.body.debate,
+					debate 		: req.body.debate,	
+					qImgUrl		: req.body.qImgUrl,
 					slug		: slugReal,
 					description	: req.body.description,
 					collectionID : collectionID,
@@ -409,6 +410,7 @@ module.exports.editQuestion = function(req, res){
 	//console.log(req.body.question);
 
 	debateTitle.update({'_id':debateName},{'question':req.body.question,
+											'qImgUrl':req.body.qImgUrl,
 										   'yBtnValue':req.body.yBtnValue,
 										   'nBtnValue':req.body.nBtnValue}, function(err, result){
 		res.json(result);

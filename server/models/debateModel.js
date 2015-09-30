@@ -9,6 +9,7 @@ var debateSchema = new mongoose.Schema({
 	nBtnValue	: String,
 	createdBy	: String,
 	debate 		: String,
+	qImgUrl		: String,
 	slug		: String,
 	description	: String,
 	collectionID : String,
