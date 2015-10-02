@@ -656,3 +656,14 @@ module.exports.getReplies = function(req, res){
         }*/
 	});
 };
+
+
+module.exports.delQuestion = function(req, res){
+	
+	var debate = debateHandler.getDebateModel();
+	
+	debate.remove({'_id':req.body.id}, function (err, result) {
+        	res.json(result);
+		});
+	
+}
