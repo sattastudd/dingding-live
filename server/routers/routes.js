@@ -77,7 +77,7 @@ module.exports = function( app, passport, express ) {
 
 	app.get('/allDebates', debateController.getDebates);
 	
-	app.get('/delQuestion', debateController.delQuestion);
+	app.post('/delQuestion', debateController.delQuestion);
 
 	app.get('/allRoasts', roastController.getRoasts);
 
