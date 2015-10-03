@@ -662,7 +662,7 @@ module.exports.delQuestion = function(req, res){
 	
 	var debate = debateHandler.getDebateModel();
 	
-	debate.remove({'_id':req.body.id}, function (err, result) {
+	debate.remove({'_id':req.body.qID}, function (err, result) {
         	res.json(result);
 		});
 	
