@@ -1,38 +1,183 @@
-<div ng-controller="QandAlistController">
-	<div class="container-fluid">
-		<div class="row">
-          	<div class="col-xs-12" style="margin-bottom:10px;margin-top:10px;">
-		       	<div class="row">
-		      		<div class="col-xs-6 marTB25 Bborder hand" style="box-shadow: 0px 1px 11px -2px gray;" ng-class="{'activeBlck':recentActv}" ng-click="recentDiv()">
-			   			<p align="center">Recent</p>
-			   		</div>
-			      	<div class="col-xs-6 marTB25 Bborder hand" style="box-shadow: 0px 1px 11px -2px gray;" ng-class="{'activeBlck':popularActv}" ng-click="popularDiv()">
-		      			<p align="center">Popular</p>
-		      		</div>
-		      	</div>
-          	</div>
-			<div class="col-xs-12 trendBlock hand" ng-if="recentActv" ng-repeat="question in questions | orderBy:'-createdOn'">
-	            <div class="row" ng-click="goToDebate(question)">
-	                <div class="col-xs-12">
-                        <p class="qFont"><b>Q.</b> {{question.question}}?</p>
+<div>
+    <div class="container-fluid">
+        <div class="row"><div class="row" style="background-color:#fff"><div class="col-xs-12">
+            <div class="col-xs-12" style="min-height:600px">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="row" ng-hide="editBoxQ">
+                                    <p class="titleQ"><b>Q.</b> {{questions.question}}?</p>
+                                </div>
+                                <div class="row" ng-if="editBoxQ" style="margin-top:15px">
+                                    <p><b>Edit your question</b></p>
+                                    <input type="text" ng-model="questions.question" class="form-control" my-maxlength="150" ng-trim="true">
+                                    <p style="margin-top:10px"><b>Edit background image Url</b></p>
+                                    <input type="text" ng-model="questions.qImgUrl" class="form-control" my-maxlength="400" ng-trim="true">
+                                    <p class="pull-right mTop0" ng-if="editBoxQ" style="color:grey">{{qEditchar}} words left</p>
+                                </div>
+                                <div ng-hide="editBoxQ">
+                                    <p style="margin-bottom:10px;margin-top:-15px;;text-align:right;color:gray;font-size:15px;">
+                                        <b>{{questions.views}}</b> Views
+                                    </p>
+                                </div>
+                                <div class="row" ng-hide="editBoxQ" style="margin-bottom:10px;">
+                                    <span class="pull-left hand" style="font-size:13px;padding-top:10px;margin-right:15px;color:gray;" ng-click="editQuestion(questions)">Edit Question</span>
+                                    <span class="pull-left hand" ng-if="maiBaap" style="font-size:13px;padding-top:10px;margin-right:15px;color:gray;" ng-click="delQuestion(questions)">Delete Question</span>
+                                    <span class="pull-right">
+                                        <img class="hand" social-facebook src="../images/facebook.png"/>
+                                        <img class="hand" social-twitter src="../images/twitter.png"/>
+                                        <img class="hand" social-gplus src="../images/googleplus.png"/>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row" ng-hide="editBoxQ">
+                                <img src="{{questions.qImgUrl}}" class="qBackImgUrl">
+                            </div>
+                            <div class="col-xs-12" ng-hide="showVoteBlock || editBoxQ">
+                                <div class="row">     
+                                    <div class="col-xs-5 col-xs-offset-7 Qbtn hand" ng-click="goToCreateQ()">
+                                        Ask Question
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="showVoteBlock" ng-hide="editBoxQ">
+                                <div class="col-xs-12" ng-hide="showVotes" style="margin-bottom:60px;">
+                                    <div class="col-xs-5 voteBtn hand" ng-click="votedY()">
+                                        {{questions.yBtnValue}}
+                                    </div>
+                                    <div class="col-xs-5 col-xs-offset-2 voteBtn hand" ng-click="votedN()" style="background-color:red">
+                                        {{questions.nBtnValue}}
+                                    </div>
+                                </div>
+                                <div class="col-xs-12" ng-if="showVotes" style="margin-top:20px;margin-bottom:60px;">
+                                    <div class="row">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                {{questions.yBtnValue}}
+                                            </div>
+                                            <div class="col-xs-7 barGraph">
+                                                <div class="row">
+                                                    <div class="col-xs-12 barYes" style="width:{{yRoundOff}}%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <b>{{yRoundOff}}%</b>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-top:10px;">
+                                            <div class="col-xs-3">
+                                                {{questions.nBtnValue}}
+                                            </div>
+                                            <div class="col-xs-7 barGraph">
+                                                <div class="row">
+                                                    <div class="col-xs-12 barNo" style="width:{{nRoundOff}}%;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <b>{{nRoundOff}}%</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top:20px;border-bottom:1px solid gainsboro">
+                                        <p align="center">Total = <b>{{TotalVotes}} Votes</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="editBoxQ && showVoteBlock">
+                                <div class="col-xs-12" style="margin-bottom:60px;" ng-hide="showtext">
+                                    <div class="col-xs-5 voteBtn hand" ng-click="editY()">
+                                        {{questions.yBtnValue}}
+                                        <p align="center" class="editVoteBtn">click to Customize</p>
+                                    </div>
+                                    <div class="col-xs-5 col-xs-offset-2 voteBtn hand" ng-click="editY()" style="background-color:red">
+                                        {{questions.nBtnValue}}
+                                        <p align="center" class="editVoteBtn">Click to Customize</p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12" style="margin-bottom:60px;margin-top:10px" ng-if="showtext">
+                                    <div class="col-xs-5">
+                                        <div class="row">
+                                            <input type="text" class="form-control" my-maxlength="10" ng-trim="false" ng-model="questions.yBtnValue" placeholder="Text for Vote Button">
+                                            <p class="pull-right mTop0" style="color:grey;margin-bottom:10px;">{{yChar}} words left</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-5 col-xs-offset-2" ng-if="showtext">
+                                        <div class="row">
+                                            <input type="text" class="form-control" my-maxlength="10" ng-trim="false" ng-model="questions.nBtnValue" placeholder="Text for Vote Button">
+                                            <p class="pull-right mTop0" style="color:grey;margin-bottom:10px;">{{nChar}} words left</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12" ng-if="editBoxQ" style="margin-top:5px">
+                                        <button type="btn" style="background-color:#009688;color:#fff;min-width:90px;" class="btn btn-default pull-right" ng-click="updateQuestion()" ng-disabled="btnDisable">Update Question</button>
+                                        <button type="btn" style="margin-right:10px" ng-click="hideTextArea()" class="btn btn-default pull-right">Cancel</button>                   
+                            </div>
+                            <div class="col-xs-12 roastDiv" ng-repeat="qna in QandA | orderBy:'-createdOn' track by $index">
+                                <div class="row">
+                                    <div class="row">
+                                        <div class="col-xs-12" style="margin-bottom:10px">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <img class="userIcon" src="{{qna.imgUrl}}" /><b>{{qna.name}}</b>
+                                                    <p class="roastTime">{{qna.createdOn | date:'d MMM h:mm a'}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 roastText" ng-bind-html="qna.htmlSafeComment"></div>
+                                        <div class="col-xs-12" style="font-size:12px;
+        margin-top:20px;">
+                                                    <div>
+                                                        <span class="pull-left replyBtn" ng-click="replyQ(qna)">Reply</span><span class="pull-left replyBtn" ng-click="goToRepliesQ(qna)">Comments 
+                                                            <b>{{qna.replyCount}}+</b></span>
+                                                        <span class="pull-left replyBtn" ng-click="editQComment(qna)">Edit</span>
+                                                        <!-- <div class="appreciateBtn hand pull-right" ng-class="appreciated?'appreciatedBtn':'appreciateBtn'" ng-click="appreciate(qna)">{{appriValue}}</div><span class="appriNo pull-right">123</span> -->
+                                                    </div>
+                                                </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 fixedTextBox">
+                                    <div class="row">
+                                        <textarea type="text" my-maxlength="2000" ng-trim="false" ng-model="comment.comment" ng-focus="showTextArea()" ng-class="postBlockActive?'textAreaActive':'textAreaBox'" class="form-control textAreaBox" placeholder="Write your Answer"></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12" ng-if="postBlockActive">
+                                            <div class="row" style="margin-bottom: 15px;">
+                                                <div class="col-xs-12">
+                                                    <div class="col-xs-12 col-sm-10 col-md-6 col-lg-6 mLeft48">
+                                                        <p class="pull-right mTop0" ng-hide="editBoxQ" style="color:grey">{{qCommentChar}} words left</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-4" ng-hide="editBoxQ">
+                                                    <input type="checkbox" ng-model="comment.anonymous" ng-checked="anony" ng-true-value="Y" ng-false-value="N" ng-model="Qanonymous" ng-disabled="anony">Anonymous
+                                                    <br>
+                                                </div>
+                                                <div class="col-xs-8" ng-hide="editBoxQ" >
+                                                    <div class="col-xs-12 col-sm-10 col-md-4 col-lg-3 mLeft48">
+                                                        <button type="btn" ng-hide="editBox || editBoxQ" style="background-color:#009688;color:#fff;width:90px;" class="btn btn-default pull-right" ng-click="post()" ng-disabled="btnDisable">Post</button>
+                                                        <button type="btn" ng-if="editBox" style="background-color:#009688;color:#fff;width:90px;" class="btn btn-default pull-right" ng-click="updateQcomment()" ng-disabled="btnDisable">Update</button>
+                                                        <button type="btn" style="margin-right:10px" ng-click="hideTextArea()" class="btn btn-default pull-right">Cancel</button>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="col-xs-12" ng-hide="editBoxQ">
+                                                        <p><b>Note</b>: Your comment will be posted anonymously if you are not Logged In</p>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                   	<div class="col-xs-12" style="color:gray">
-                       	<span>By - {{question.createdBy}}</span>
-          	         	<span class="pull-right">Views - {{question.views}}</span>
-                    </div>
-	            </div>
-	        </div>
-	        <div class="col-xs-12 trendBlock hand" ng-if="popularActv" ng-repeat="question in questions | orderBy:'-views'">
-	            <div class="row" ng-click="goToDebate(question)">
-	                <div class="col-xs-12">
-                        <p class="qFont"><b>Q.</b> {{question.question}}?</p>
-                    </div>
-                   	<div class="col-xs-12" style="color:gray">
-                       	<span>By - {{question.createdBy}}</span>
-          	         	<span class="pull-right">Views - {{question.views}}</span>
-                    </div>
-	            </div>
-	        </div>
-		</div>
-	</div>
+                </div>
+        </div>
+    </div>
 </div>
