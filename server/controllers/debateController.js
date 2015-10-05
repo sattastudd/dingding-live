@@ -15,9 +15,9 @@ module.exports.createDebate = function(req, res){
 
 	if(req.body.debate === "Y"){
 			var slugValue 	=  (req.body.question + '-options-' + req.body.yBtnValue + '-' + req.body.nBtnValue).toLowerCase();
-				slugReal 	=  slugValue.replace(/[\s+,.<>'!@#$]/g, '-');
+				slugReal 	=  slugValue.replace(/[\s+,.<>'!@#$]/g, '-') + '.html';
 	}else{
-		slugReal = req.body.question.replace(/[\s+,.<>'!@#$]/g, '-').toLowerCase();
+		slugReal = req.body.question.replace(/[\s+,.<>'!@#$]/g, '-').toLowerCase() + '.html';
 	}
 
 	//var collectionIDSorted = req.body.question.replace(/[\s+,.<>'!@#$]/g, '-').toLowerCase();
