@@ -1,5 +1,5 @@
 <div>
-	<div class="container-fluid">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12">
                 <div class="row">
@@ -7,16 +7,16 @@
                         <div class="row">
                             <div class="row">
                             <!-- need to fix its width -->
-                            	<div class="col-xs-12 roastTitle">Roast of {{roastTitle.name}}</div>
+                                <div class="col-xs-12 roastTitle">Roast of {{roastTitle.name}}</div>
                             </div>
                             <div class="row">
-	                            <div class="col-xs-12 roastBanner">
-	                                <div class="col-xs-12 tpad20">
-	                                    <p class="roastQoute">"{{roastTitle.quote}}"</p>
-	                                    <p class="pull-right"> - {{roastTitle.name}}</p>
-	                                </div>
-	                            </div>
-	                        </div>
+                                <div class="col-xs-12 roastBanner">
+                                    <div class="col-xs-12 tpad20">
+                                        <p class="roastQoute">"{{roastTitle.quote}}"</p>
+                                        <p class="pull-right"> - {{roastTitle.name}}</p>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-xs-12 col-md-offset-1 col-lg-offset-1" style="margin-bottom:35px">
                                 <img src="{{roastTitle.imgUrl}}" class="roastImage" />
                             </div>
@@ -31,7 +31,7 @@
                                 <p class="pull-right">
                                     <b>{{roastTitle.views}}</b> Views
                                 </p>
-                                <p class="pull-left hand" ng-click="editRoastContent()">
+                                <p ng-if="maiBaap" class="pull-left hand" ng-click="editRoastContent()">
                                     edit Roast
                                 </p>
                             </div>
@@ -59,7 +59,7 @@
                                     <p class="pull-right">
                                         <b>{{roastTitle.views}}</b> Views
                                     </p>
-                                    <p class="pull-left hand" ng-click="editRoastContent()">
+                                    <p ng-if="maiBaap" class="pull-left hand" ng-click="editRoastContent()">
                                         edit Roast
                                     </p>
                                 </div>
