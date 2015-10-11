@@ -8,42 +8,18 @@
 		            		Trending Now
 		            	</div>
 		            </div>
-	                <div class="col-xs-12 trendBlock hand" ng-repeat="trends in trending">
-	                    <div class="row" ng-click="goToRoast(trends)">
-	                        <div class="col-xs-4">
-	                            <img src="https://yt3.ggpht.com/-QSdUl6wilzo/AAAAAAAAAAI/AAAAAAAAAAA/BGrQrNGDA8U/s900-c-k-no/photo.jpg" class="roasteeImg" />
+	                <div class="col-xs-12 trendBlock hand" ng-repeat="content in roastList.slice().reverse()">
+	                    <div class="row" ng-click="goToRoast(content)">
+	                    	<div class="row">
+		                        <div class="col-xs-12">
+		                            <img src="{{content.bannerUrl}}" class="roasteeImg" />
+		                        </div>
+		                    </div>
+	                        <div class="col-xs-12">
+	                        	<p style="margin-top: 10px;border-bottom: 1px solid gainsboro;color:grey">{{content.type}}</p>
 	                        </div>
-	                        <div class="col-xs-8">
-	                            <div class="row">
-	                                <div class="col-xs-12 roasteeName">
-	                                    <p>
-	                                        "{{trends.quote}}"
-	                                    </p>
-	                                    <p class="f20">
-	                                        <strong>-{{trends.name}}</strong>
-	                                    </p>
-	                                </div>
-	                                <!-- <div class="col-xs-12 rpmText">
-	                                	<div class="row">
-		                                    <div class="col-xs-6 hidden-xs">
-		                                    	Total Roasts: 
-		                                    	<b style="font-size:18px;">{{trends.roastCounter}}</b>
-		                                    </div>
-		                                    <div class="col-xs-6 hidden-sm hidden-md hidden-lg">
-		                                    	TR: 
-		                                    	<b style="font-size:18px;">{{trends.roastCounter}}</b>
-		                                    </div>
-		                                    <div class="col-xs-6 hidden-xs pull-right">
-		                                    	Roasts per minute: 
-		                                    	<b style="font-size:18px;">{{trends.rpm}}</b>
-		                                   	</div>
-		                                   	<div class="col-xs-6 hidden-sm hidden-md hidden-lg pull-right">
-		                                    	RPM: 
-		                                    	<b style="font-size:18px;">{{trends.rpm}}</b>
-		                                   	</div>
-		                                </div>
-	                                </div> -->
-	                            </div>
+	                        <div class="col-xs-12">
+	                        	<p class="roastListFont">{{content.title}}</p>
 	                        </div>
 	                    </div>
 	                </div>
