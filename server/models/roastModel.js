@@ -6,10 +6,16 @@ var mongoose 		= require('mongoose');
 var roastSchema = new mongoose.Schema({
 	name		: String,
 	quote 		: String,
-	image		: String,
+	imgUrl		: String,
+	bannerUrl	: String,
 	createdOn	: Date,
+	type		: String,
 	slug		: String,
 	views		: Number,
+	title		: String,
+	position	: String,
+	batchDate	: String,
+	content		: String,
 	createdBy	: String
 });
 
