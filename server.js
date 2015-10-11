@@ -27,55 +27,43 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 require('./server/config/passport')(passport);
 
-/*app.engine('html', require('ejs').renderFile); //TODO npm install ejs
-app.set('view engine', 'html');*/
-app.set('view engine', 'ejs');  
-app.get('/appResources/*', function( req, res, next){
-	res.sendFile(__dirname + '/client/' + req.originalUrl );	
-});
-
-app.get('/images/*', function( req, res, next){
-	res.sendFile(__dirname + '/client/' + req.originalUrl );	
-});
-
-app.get('/views/*', function( req, res, next){
-	res.sendFile(__dirname + '/client/' + req.originalUrl );	
-});
+app.engine('html', require('ejs').renderFile); //TODO npm install ejs
+app.set('view engine', 'html');
+app.use('/', express.static(__dirname + '/client'));
 
 app.get('/', function(req, res){
-	console.log( 'Sending EJS file' );
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 
 app.get('/roast/:id', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});	
+	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/create', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/roastList', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/QandA/:id', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/QandAlist', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/replies/:id', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/repliesR/:id', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/home', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/aboutUs', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/404', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 
 require( './server/routers/routes' )(app, passport, express);
