@@ -2,7 +2,7 @@ var bodyParser          = require('body-parser');
 
 var roastController     = require('../../server/controllers/roastController'),
     debateController    = require('../../server/controllers/debateController'),
-    trendingController  = require('../../server/controllers/trendingController')
+    trendingController  = require('../../server/controllers/trendingController'),
     memberController  	= require('../../server/controllers/memberController');
 
 module.exports = function( app, passport, express ) {
@@ -98,6 +98,8 @@ module.exports = function( app, passport, express ) {
 	app.post('/newRcomments', roastController.getNewRcomments);
 
 	app.post('/newQcomments', debateController.getNewQcomments);
+
+	app.post('/updateRoast', roastController.updateRoast);
 
 	app.post('/editQcomment/:debateID', debateController.editQcomment);
 
