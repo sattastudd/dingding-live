@@ -44,22 +44,33 @@ app.get('/views/*', function( req, res, next){
 
 app.get('/', function(req, res){
 	console.log( 'Sending EJS file' );
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+
+	res.sendFile(__dirname + '/client/index.html');
+
 });
 
 app.get('/roast/:id', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});	
+	var obj = {
+		title : '',
+		imgUrl : '',
+		url : ''
+	};
+	res.sendFile(__dirname + '/client/index.html');	
 });
 app.get('/create', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/roastList', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/QandA/:id', function(req, res){
 
 	debateController.getDebateForRoute( req.params.id, function( data ){
-		var obj = {};
+		var obj = {
+			title : '',
+			imgUrl : '',
+			url : ''
+		};
 
 		if( data.length > 0 ) {
 			data = data[0];
@@ -74,22 +85,22 @@ app.get('/QandA/:id', function(req, res){
 	});
 });
 app.get('/QandAlist', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/replies/:id', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/repliesR/:id', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/home', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/aboutUs', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/404', function(req, res){
-	res.render(__dirname + '/client/index.ejs', {title : 'Title.'});
+	res.sendFile(__dirname + '/client/index.html');
 });
 
 require( './server/routers/routes' )(app, passport, express);
