@@ -78,6 +78,22 @@ module.exports.createDebate = function(req, res){
 };
 
 
+var getDebate = function( collectionName, responseOrCallback ) {
+	var debate = debateHandler.getDebateModel();
+	
+	debate.find({'collectionID' : collectionName}, function (err, doc) {       
+        
+        if(typeof responseOrCallback === 'object' ){
+        	responseOrCallback.json( doc );
+        } else {
+        	responseOrCallback( doc );
+        }        
+    });
+}
+
+module.exports.getDebateForRoute = getDebate;
+
+
 module.exports.getDebate = function(req, res){
 	
 	var debate = debateHandler.getDebateModel();
@@ -94,10 +110,9 @@ module.exports.getDebate = function(req, res){
 
 	var collectionName = id.substring(0, 112);
 	
-	debate.find({'collectionID' : collectionName}, function (err, doc) {
-        res.json(doc);
-    });
+	getDebate( collectionName, res);
 };
+
 
 
 
