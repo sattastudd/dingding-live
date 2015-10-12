@@ -4,7 +4,7 @@ module.exports.createRoast = function(req, res){
 
 	var Roast = roastHandler.getRoastModel();
 
-	var slugReal = req.body.title.replace(/[ +,.<>'!@#$]/g, '_').toLowerCase();
+	var slugReal = req.body.title.replace(/[ +,.<>'!@#$]/g, '-').toLowerCase();
 
 	Roast.find({'slug' : slugReal}, function (err, doc) {
 		var docLength = doc.length;
