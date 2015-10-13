@@ -238,7 +238,6 @@ module.exports.updateRoast = function(req, res){
 
 	roastTitle.update({'_id':roastID},{ 'name'			: req.body.name,
 										'quote' 		: req.body.quote,
-										'views'			: 1,
 										'imgUrl'		: req.body.imgUrl,
 										'bannerUrl'		: req.body.bannerUrl,
 										'type'			: req.body.type,
