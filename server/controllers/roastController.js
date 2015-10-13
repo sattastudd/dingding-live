@@ -230,7 +230,7 @@ module.exports.editRcomment = function(req, res){
 
 module.exports.updateRoast = function(req, res){
 
-	var roastID = req.body.id;
+	var roastID = req.body._id;
 
 	var roastTitle = roastHandler.getRoastModel();
 
