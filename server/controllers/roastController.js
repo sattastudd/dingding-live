@@ -61,6 +61,16 @@ module.exports.createRoast = function(req, res){
 	
 };
 
+var getRoastForRoute = function( collectionName, callback ) {
+	var roast = roastHandler.getRoastModel();
+
+	roast.find({'slug' : collectionName }, function( err, doc ) {
+		callback( doc );
+	});
+}
+
+module.exports.getRoastForRoute = getRoastForRoute;
+
 
 module.exports.getRoast = function(req, res){
 	

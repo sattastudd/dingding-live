@@ -50,12 +50,18 @@ app.get('/', function(req, res){
 });
 
 app.get('/roast/:id', function(req, res){
-	var obj = {
-		title : '',
-		imgUrl : '',
-		url : ''
-	};
-	res.sendFile(__dirname + '/client/index.html');	
+	
+	roastController.getRoastForRoute( req.params.id, function( data ){
+		var obj = {	title : '', imgUrl : '', url : '' };
+
+		if( data.length > 0 ) {
+			data = data[ 0 ];
+
+			obj = { title : data.title, imgUrl : data.bannerUrl, url : req.protocol + '://' + req.get('host') + req.originalUrl };
+		}
+
+		res.render( __dirname + '/client/index.ejs', obj );
+	});
 });
 app.get('/create', function(req, res){
 	res.sendFile(__dirname + '/client/index.html');
