@@ -31,9 +31,6 @@
                                 <p class="pull-right">
                                     <b>{{roastTitle.views}}</b> Views
                                 </p>
-                                <p ng-if="maiBaap" class="pull-left hand" ng-click="editRoastContent()">
-                                    edit Roast
-                                </p>
                             </div>
                             <div class="row" style="background-color:#fff;min-height:560px;">
                                 <div ng-repeat="data in roastData">
@@ -44,27 +41,13 @@
                                         <p style="font-size:17px;margin-top:20px" ng-bind-html="data.htmlSafeComment"></p>
                                     </div>
                                     <div class="col-xs-12">
-                                        <p style="font-size:17px;margin-top:20px">Written By</p>
-                                        <p style="font-size:17px;color:grey">-{{data.createdBy}}</p>
+                                        <p style="font-size:17px;color:grey">{{data.createdBy}}</p>
                                     </div>
                                 </div>
-                                <div class="col-xs-12">
-                                    <p class="pull-right">
-                                        <img class="hand" social-facebook src="../images/facebook.png"/>
-                                        <img class="hand" social-twitter src="../images/twitter.png"/>
-                                        <img class="hand" social-gplus src="../images/googleplus.png"/>
-                                    </p>
-                                </div>
                                 <div class="col-xs-12" style="color:gray">
-                                    <p class="pull-right">
-                                        <b>{{roastTitle.views}}</b> Views
-                                    </p>
                                     <p ng-if="maiBaap" class="pull-left hand" ng-click="editRoastContent()">
                                         edit Roast
                                     </p>
-                                </div>
-                                <div class="col-xs-12">
-                                    <p style="font-size:18px;border-bottom:1px solid gainsboro;">Comment Below</p>
                                 </div>
                                 <div ng-if="editRcontent">
                                     <div class="col-xs-12">
@@ -121,25 +104,27 @@
                                         <button type="button" ng-click="cancelRoastEdit()" class="btn btn-place-primary" ng-disabled="btnDisable">Cancel</button>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 roastDiv" ng-repeat="roast in roasts | orderBy:'-createdOn'">
-                                    <div class="row">
-                                        <div class="col-xs-12" style="margin-bottom:10px">
-                                            <div class="row">
-                                                <div class="col-xs-12">
-                                                    <img class="userIcon" src="{{roast.imgUrl}}" /><b>{{roast.name}}</b>
-                                                    <p class="roastTime">{{roast.createdOn | date:'d MMM h:mm a'}}</p>
+                                <div class="col-xs-12" style="background-color:#F1F1F1;padding-top:10px;">
+                                    <div class="col-xs-12 trendBlock" ng-repeat="roast in roasts | orderBy:'-createdOn'">
+                                        <div class="row">
+                                            <div class="col-xs-12" style="margin-bottom:10px">
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <img class="userIcon" src="{{roast.imgUrl}}" /><b>{{roast.name}}</b>
+                                                        <p class="roastTime">{{roast.createdOn | date:'d MMM h:mm a'}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="col-xs-12 roastText" ng-bind-html="roast.htmlSafeComment"></div>
+                                            <div class="col-xs-12" style="font-size:12px;
+            margin-top:20px;">
+                                                <div>
+                                                    <span class="pull-left replyBtn" ng-click="replyR(roast)">Reply</span><span class="pull-left replyBtn" ng-click="goToRepliesR(roast)">Comments</span>
+                                                    <span class="pull-left replyBtn" ng-click="editRComment(roast)">Edit</span>
+                                                    <!-- <div class="appreciateBtn hand pull-right" ng-class="appreciated?'appreciatedBtn':'appreciateBtn'" ng-click="appreciate(roast)">{{appriValue}}</div><span class="appriNo pull-right"><i class="glyphicon glyphicon-thumbs-up"></i>123</span> -->
+                                                </div>
+                                            </div> 
                                         </div>
-                                        <div class="col-xs-12 roastText" ng-bind-html="roast.htmlSafeComment"></div>
-                                        <div class="col-xs-12" style="font-size:12px;
-        margin-top:20px;">
-                                            <div>
-                                                <span class="pull-left replyBtn" ng-click="replyR(roast)">Reply</span><span class="pull-left replyBtn" ng-click="goToRepliesR(roast)">Comments</span>
-                                                <span class="pull-left replyBtn" ng-click="editRComment(roast)">Edit</span>
-                                                <!-- <div class="appreciateBtn hand pull-right" ng-class="appreciated?'appreciatedBtn':'appreciateBtn'" ng-click="appreciate(roast)">{{appriValue}}</div><span class="appriNo pull-right"><i class="glyphicon glyphicon-thumbs-up"></i>123</span> -->
-                                            </div>
-                                        </div> 
                                     </div>
                                 </div>
                             </div>
